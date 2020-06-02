@@ -134,6 +134,10 @@ If you ever get stuck, reference one of the existing passes, they're well docume
 4) Register it under the `PassManager` by adding a new option, `register_pass_info` and `register_callback`, as necessary,
 5) Submit the pass for review.
 
+Note that for as pass to be accepted upstream, it must compile for a `gcc` build that has `--enable-checking=yes,rtl,tree` added. (You will need to re-build `gcc` for your target architecture with `--enable-checking`.)
+
+Additionally: If you experience crashes when developing your plug-in, you can debug them by passing `-wrapper gdb,--args` to `gcc`. (Run `gcc` in `gdb`, effectively.)
+
 ### License
 
 Hellscape is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
