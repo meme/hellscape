@@ -4,10 +4,6 @@ GIMPLE obfuscator for C, C++, Go, ... all supported GCC targets and front-ends t
 
 Inspired by the seminal paper by Pascal Junod and co.: [Obfuscator-LLVM -- Software Protection for the Masses](https://github.com/obfuscator-llvm/obfuscator).
 
-SUPPORT WILL NOT BE PROVIDED ON THE ISSUE TRACKER (bugs are always welcome). PAID SUPPORT IS AVAILABLE.
-
-You can also donate via BTC: `1M2RbhYU98fyi7fDFAKTSuv47ERGEJU5xN`.
-
 ##### Table of Contents
 * [Installation](#installation)  
 * ["Show me how to use it, dammit!"](#show-me-how-to-use-it-dammit)
@@ -26,7 +22,9 @@ You can also donate via BTC: `1M2RbhYU98fyi7fDFAKTSuv47ERGEJU5xN`.
 
 Currently building on Linux is supported, you may find some luck on macOS (PRs are welcomed). 
 
-You need CMake, gcc (obviously, but with plugins enabled) and (optionally) ninja.
+You need CMake, gcc (with plugins enabled) and (optionally) ninja.
+
+GCC >= 9.3.0 is required, GCC 10.1.0 is tested and working.
 
 ```
 $ mkdir build
