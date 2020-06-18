@@ -31,6 +31,7 @@
 
 #include <iostream>
 #include <vector>
+#include "Utils.h"
 
 void BCFPass::create_globals() {
   // Already created the declarations.
@@ -59,7 +60,7 @@ void BCFPass::create_globals() {
 }
 
 unsigned int BCFPass::execute(function* f) {
-  if (!mEnable) return 0;
+  if(toObfuscate(mEnable, f, "bcf")) return 0;
 
   create_globals();
 

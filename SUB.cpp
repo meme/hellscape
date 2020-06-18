@@ -27,9 +27,10 @@
 #include <gimplify-me.h>
 
 #include <iostream>
+#include "Utils.h"
 
 unsigned int SUBPass::execute(function* f) {
-  if (!mEnable) return 0;
+  if(toObfuscate(mEnable, f, "sub")) return 0;
 
   for (uint32_t count = 0; count < mSubLoop; count++) {
     basic_block bb;
