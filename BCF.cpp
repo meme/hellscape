@@ -60,7 +60,7 @@ void BCFPass::create_globals() {
 }
 
 unsigned int BCFPass::execute(function* f) {
-  if(toObfuscate(mEnable, f, "bcf")) return 0;
+  if(!toObfuscate(mEnable, f, "bcf")) return 0;
 
   create_globals();
 

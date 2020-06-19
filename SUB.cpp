@@ -30,7 +30,7 @@
 #include "Utils.h"
 
 unsigned int SUBPass::execute(function* f) {
-  if(toObfuscate(mEnable, f, "sub")) return 0;
+  if(!toObfuscate(mEnable, f, "sub")) return 0;
 
   for (uint32_t count = 0; count < mSubLoop; count++) {
     basic_block bb;
