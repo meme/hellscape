@@ -38,29 +38,12 @@ static struct plugin_info my_plugin_info = {"1.0.0",
 
 
 static tree
-handle_obfus_attribute (tree *node, tree name, tree args, int flags, bool *no_add_attrs)
-{
+handle_obfus_attribute (tree *node, tree name, tree args, int flags, bool *no_add_attrs) {
   return NULL_TREE;
 }
 
-/* Attribute definition */
-
 static struct attribute_spec fla_attr =
-{ "obfus", 1, 1, false,  false, false, false, handle_obfus_attribute, NULL};
-
-
-/* Plugin callback called during attribute registration */
-
-static void 
-register_attributes (void *event_data, void *data) 
-{
-  register_attribute (&fla_attr);
-}
-
-void finish_gcc(void* gcc_data, void* user_data) {
-  // Delete the RNG.
-  delete (Random*) user_data;
-}
+  { "obfus", 1, 1, false,  false, false, false, handle_obfus_attribute, NULL};
 
 int plugin_init(struct plugin_name_args* plugin_info,
                 struct plugin_gcc_version* version) {
@@ -174,7 +157,9 @@ seed_error:
   viz_pass_info.ref_pass_instance_number = 1;
   viz_pass_info.pos_op = PASS_POS_INSERT_AFTER;
 
-  register_callback (plugin_info->base_name, PLUGIN_ATTRIBUTES, register_attributes, NULL);
+  register_callback (plugin_info->base_name, PLUGIN_ATTRIBUTES, [](void* event_data, void* user_data) {
+    register_attribute(&fla_attr);
+  }, NULL);
   
   register_callback(plugin_info->base_name, PLUGIN_PASS_MANAGER_SETUP, nullptr,
                     &sub_pass_info);
@@ -185,7 +170,9 @@ seed_error:
   register_callback(plugin_info->base_name, PLUGIN_PASS_MANAGER_SETUP, nullptr,
                     &viz_pass_info);
 
-  register_callback(plugin_info->base_name, PLUGIN_FINISH, finish_gcc, random);
+  register_callback(plugin_info->base_name, PLUGIN_FINISH, [](void* event_data, void* user_data) {
+    delete (Random*) user_data;
+  }, random);
 
   return 0;
 }
