@@ -29,10 +29,11 @@
 #include <vector>
 #include <unordered_map>
 
+#include "Utils.h"
 #include "Viz.h"
 
 unsigned int FLAPass::execute(function* f) {
-  if (!mEnable) return 0;
+  if(!toObfuscate(mEnable, f, "fla")) return 0;
 
   // If there's only one block... not much to do.
   if (f->cfg->x_n_basic_blocks <= 3) {

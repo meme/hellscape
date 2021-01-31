@@ -7,5 +7,5 @@ execute_process(COMMAND gcc -print-file-name=plugin OUTPUT_VARIABLE GCC_PLUGIN_D
 set(GCC_INCLUDE_DIR ${GCC_PLUGIN_DIR}/include)
 include_directories(${GCC_INCLUDE_DIR})
 
-add_library(hellscape SHARED PassManager.cpp Random.h Viz.cpp Viz.h SUB.cpp SUB.h BCF.cpp BCF.h FLA.cpp FLA.h)
+add_library(hellscape SHARED PassManager.cpp Random.h Viz.cpp Viz.h SUB.cpp SUB.h BCF.cpp BCF.h FLA.cpp FLA.h Utils.cpp Utils.h)
 set_target_properties(hellscape PROPERTIES PREFIX "")
